@@ -25,4 +25,6 @@ public class CartoesModel implements Serializable {
     private String categoria;
 
     private String bandeira;
+
+    private String versao;
 }

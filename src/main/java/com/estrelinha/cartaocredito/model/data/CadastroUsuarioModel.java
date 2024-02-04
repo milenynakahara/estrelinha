@@ -44,7 +44,7 @@ public class CadastroUsuarioModel {
         this.cartoesModels = cartoesModels;
     }
 
-    public void AtualizarCadastroUsuarioModel(UsuarioDtoModel dados, CartoesModel cartoesModels) {
+    public void atualizarCadastroUsuarioModel(UsuarioDtoModel dados, CartoesModel cartoesModels) {
         if (!dados.nome().isBlank())
             this.nome = dados.nome();
 

@@ -9,4 +9,7 @@ import org.springframework.data.mongodb.repository.Query;
 public interface CadastroRepository extends MongoRepository<CadastroUsuarioModel, String> {
     @Query("{'cpf': ?0}")
     CadastroUsuarioModel getDocumento(String cpf);
+
+    @Query("{'id': ?0}")
+    CadastroUsuarioModel getId(String id);
 }

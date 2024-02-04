@@ -10,6 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 public record RetornoUsuarioDtoModel(
+        String id,
         @NotBlank
         String nome,
         @NotBlank
@@ -30,6 +31,7 @@ public record RetornoUsuarioDtoModel(
 
     public RetornoUsuarioDtoModel(CadastroUsuarioModel cadastroUsuarioModel) {
         this(
+                cadastroUsuarioModel.getId(),
                 cadastroUsuarioModel.getNome(),
                 cadastroUsuarioModel.getCpf(),
                 cadastroUsuarioModel.getDataDeNascimento(),

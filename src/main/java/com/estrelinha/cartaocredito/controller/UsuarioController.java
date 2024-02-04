@@ -6,7 +6,6 @@ import com.estrelinha.cartaocredito.model.dto.RetornoUsuarioDtoModel;
 import com.estrelinha.cartaocredito.model.dto.UsuarioDtoModel;
 import com.estrelinha.cartaocredito.repository.CadastroRepository;
 import com.estrelinha.cartaocredito.repository.CartoesRepository;
-import com.estrelinha.cartaocredito.service.interfaces.UsuarioInterface;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
@@ -14,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/cartao")
+@RequestMapping("/api/cartao")
 public class UsuarioController {
     @Autowired
     private CadastroRepository cadastroRepository;
@@ -46,6 +45,7 @@ public class UsuarioController {
         return new RetornoUsuarioDtoModel(cadastroRepository.getDocumento(documento));
     }
 
+
     @PutMapping()
     @Transactional
     public String atualizarCadastro(@Param("produto") String produto,
@@ -57,7 +57,7 @@ public class UsuarioController {
         try {
             CadastroUsuarioModel cadastro = cadastroRepository.getDocumento(usuarioDtoModel.cpf());
             CartoesModel cartoesModel = cartoesRepository.getCartoes(produto, categoria, bandeira);
-            cadastro.AtualizarCadastroUsuarioModel(usuarioDtoModel, cartoesModel);
+            cadastro.atualizarCadastroUsuarioModel(usuarioDtoModel, cartoesModel);
             cadastroRepository.save(cadastro);
             retorno = "Usuário atualizado com sucesso";
         }catch (Exception e){
@@ -69,14 +69,13 @@ public class UsuarioController {
     @DeleteMapping
     @Transactional
     public String deletaCadastro(@Param("documento") String documento) {
-        String retorno = "";
+        String retorno = "Cliente não encontrado";
         try {
             CadastroUsuarioModel cadastroUsuarioModel = cadastroRepository.getDocumento(documento);
             if (!cadastroUsuarioModel.getCpf().isBlank()) {
-                cadastroRepository.delete(cadastroRepository.getDocumento(documento));
+                cadastroRepository.delete(cadastroRepository.getId(cadastroUsuarioModel.getId()));
                 retorno = "Cliente deletado com sucesso";
             }
-            retorno = "Cliente não encontrado";
         }catch (Exception e){
             e.getStackTrace();
         }
