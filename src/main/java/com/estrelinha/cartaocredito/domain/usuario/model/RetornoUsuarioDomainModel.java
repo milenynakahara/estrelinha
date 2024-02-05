@@ -1,12 +1,13 @@
-package com.estrelinha.cartaocredito.model.dto;
+package com.estrelinha.cartaocredito.domain.usuario.model;
 
-import com.estrelinha.cartaocredito.domain.usuario.model.UsuarioDomainModel;
 import com.estrelinha.cartaocredito.infrastructure.model.data.CadastroUsuarioModel;
+import com.estrelinha.cartaocredito.infrastructure.model.data.CartoesModel;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
 
-public record UsuarioDtoModel(
+public record RetornoUsuarioDomainModel(
+        String id,
         @NotBlank
         String nome,
         @NotBlank
@@ -22,10 +23,12 @@ public record UsuarioDtoModel(
         String endereco,
         String complemento,
         String cep,
-        String bairro) {
+        String bairro,
+        CartoesModel cartoesModel) {
 
-    public UsuarioDtoModel(CadastroUsuarioModel cadastroUsuarioModel) {
+    public RetornoUsuarioDomainModel(CadastroUsuarioModel cadastroUsuarioModel) {
         this(
+                cadastroUsuarioModel.getId(),
                 cadastroUsuarioModel.getNome(),
                 cadastroUsuarioModel.getCpf(),
                 cadastroUsuarioModel.getDataDeNascimento(),
@@ -35,22 +38,7 @@ public record UsuarioDtoModel(
                 cadastroUsuarioModel.getEndereco(),
                 cadastroUsuarioModel.getComplemento(),
                 cadastroUsuarioModel.getCep(),
-                cadastroUsuarioModel.getBairro()
-        );
-    }
-
-    public UsuarioDtoModel(UsuarioDomainModel dados) {
-        this(
-                dados.nome(),
-                dados.cpf(),
-                dados.dataDeNascimento(),
-                dados.email(),
-                dados.ddd(),
-                dados.telefone(),
-                dados.endereco(),
-                dados.complemento(),
-                dados.cep(),
-                dados.bairro()
-        );
+                cadastroUsuarioModel.getBairro(),
+                cadastroUsuarioModel.getCartoesModels());
     }
 }

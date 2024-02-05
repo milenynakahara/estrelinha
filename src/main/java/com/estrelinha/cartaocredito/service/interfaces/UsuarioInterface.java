@@ -1,11 +1,11 @@
 package com.estrelinha.cartaocredito.service.interfaces;
 
-import com.estrelinha.cartaocredito.model.data.CadastroUsuarioModel;
 import com.estrelinha.cartaocredito.model.dto.RetornoUsuarioDtoModel;
+import com.estrelinha.cartaocredito.model.dto.UsuarioDtoModel;
 
 public interface UsuarioInterface {
-    void salvarUsuario(CadastroUsuarioModel cadastroUsuarioModel);
+    String salvarUsuario(String produto, String categoria, String bandeira, UsuarioDtoModel usuarioDtoModel);
     RetornoUsuarioDtoModel buscarCadastro(String id);
-    void atualizarUsuario(String id);
-    void deletarUsuario(String id);
+    String atualizarUsuario(String produto, String categoria, String bandeira, UsuarioDtoModel usuarioDtoModel);
+    String deletarUsuario(String documento);
 }

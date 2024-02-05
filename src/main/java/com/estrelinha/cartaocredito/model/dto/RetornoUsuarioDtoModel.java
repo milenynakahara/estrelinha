@@ -1,13 +1,11 @@
 package com.estrelinha.cartaocredito.model.dto;
 
-import com.estrelinha.cartaocredito.model.data.CadastroUsuarioModel;
-import com.estrelinha.cartaocredito.model.data.CartoesModel;
+import com.estrelinha.cartaocredito.domain.usuario.model.RetornoUsuarioDomainModel;
+import com.estrelinha.cartaocredito.infrastructure.model.data.CadastroUsuarioModel;
+import com.estrelinha.cartaocredito.infrastructure.model.data.CartoesModel;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
 
 public record RetornoUsuarioDtoModel(
         String id,
@@ -29,19 +27,35 @@ public record RetornoUsuarioDtoModel(
         String bairro,
         CartoesModel cartoesModel) {
 
-    public RetornoUsuarioDtoModel(CadastroUsuarioModel cadastroUsuarioModel) {
+    public RetornoUsuarioDtoModel(CadastroUsuarioModel dados) {
         this(
-                cadastroUsuarioModel.getId(),
-                cadastroUsuarioModel.getNome(),
-                cadastroUsuarioModel.getCpf(),
-                cadastroUsuarioModel.getDataDeNascimento(),
-                cadastroUsuarioModel.getEmail(),
-                cadastroUsuarioModel.getDdd(),
-                cadastroUsuarioModel.getTelefone(),
-                cadastroUsuarioModel.getEndereco(),
-                cadastroUsuarioModel.getComplemento(),
-                cadastroUsuarioModel.getCep(),
-                cadastroUsuarioModel.getBairro(),
-                cadastroUsuarioModel.getCartoesModels());
+                dados.getId(),
+                dados.getNome(),
+                dados.getCpf(),
+                dados.getDataDeNascimento(),
+                dados.getEmail(),
+                dados.getDdd(),
+                dados.getTelefone(),
+                dados.getEndereco(),
+                dados.getComplemento(),
+                dados.getCep(),
+                dados.getBairro(),
+                dados.getCartoesModels());
+    }
+
+    public RetornoUsuarioDtoModel(RetornoUsuarioDomainModel dados) {
+        this(
+                dados.id(),
+                dados.nome(),
+                dados.cpf(),
+                dados.dataDeNascimento(),
+                dados.email(),
+                dados.ddd(),
+                dados.telefone(),
+                dados.endereco(),
+                dados.complemento(),
+                dados.cep(),
+                dados.bairro(),
+                dados.cartoesModel());
     }
 }

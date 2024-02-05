@@ -1,5 +1,6 @@
-package com.estrelinha.cartaocredito.model.data;
+package com.estrelinha.cartaocredito.infrastructure.model.data;
 
+import com.estrelinha.cartaocredito.domain.usuario.model.UsuarioDomainModel;
 import com.estrelinha.cartaocredito.model.dto.UsuarioDtoModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -44,7 +45,21 @@ public class CadastroUsuarioModel {
         this.cartoesModels = cartoesModels;
     }
 
-    public void atualizarCadastroUsuarioModel(UsuarioDtoModel dados, CartoesModel cartoesModels) {
+    public CadastroUsuarioModel(UsuarioDomainModel dados, CartoesModel cartoesModels) {
+        this.nome = dados.nome();
+        this.cpf = dados.cpf();
+        this.dataDeNascimento = dados.dataDeNascimento();
+        this.email = dados.email();
+        this.ddd = dados.ddd();
+        this.telefone = dados.telefone();
+        this.endereco = dados.endereco();
+        this.complemento = dados.complemento();
+        this.cep = dados.cep();
+        this.bairro = dados.bairro();
+        this.cartoesModels = cartoesModels;
+    }
+
+    public void atualizarCadastroUsuarioModel(UsuarioDomainModel dados, CartoesModel cartoesModels) {
         if (!dados.nome().isBlank())
             this.nome = dados.nome();
 
